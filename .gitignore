@@ -1,0 +1,20 @@
+
+/target/
+
+.env
+.env.*
+!.env.example
+
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Keys and credentials must never be committed
+*.pem
+*.key
+*.p12
+secrets/
+
+.DS_Store
+Thumbs.db
