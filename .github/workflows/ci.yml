@@ -21,7 +21,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install Rust toolchain
         run: |
           rustup toolchain install stable --profile minimal -c rustfmt -c clippy
@@ -37,7 +37,7 @@ jobs:
     name: C engine under ASan + UBSan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build and run C tests with sanitizers
         run: |
           cc -std=c11 -Wall -Wextra -Wpedantic -Werror \
@@ -49,7 +49,7 @@ jobs:
     name: dependency audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install Rust toolchain
         run: |
           rustup toolchain install stable --profile minimal
