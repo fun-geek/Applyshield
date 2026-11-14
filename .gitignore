@@ -10,6 +10,22 @@
 *.sqlite3
 *.log
 
+<<<<<<< HEAD
 .DS_Store
 Thumbs.db
 /target/
+=======
+# Keys and credentials must never be committed
+*.pem
+*.key
+*.p12
+secrets/
+
+.DS_Store
+Thumbs.db
+
+# Your real profile, job feeds and ApplyShield data must never be committed.
+# Copy the examples to my-*.txt and edit those.
+.applyshield/
+my-*.txt
+>>>>>>> c31ce4e (Update in Applysheild)

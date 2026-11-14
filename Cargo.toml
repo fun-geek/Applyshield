@@ -2,5 +2,15 @@
 name = "applyshield"
 version = "0.1.0"
 edition = "2024"
+<<<<<<< HEAD
 
 [dependencies]
+=======
+publish = false # not published to crates.io; avoids accidental release
+
+[dependencies]
+
+[build-dependencies]
+# Compiles the C matching engine (c/matcher.c). Build-time only.
+cc = "1"
+>>>>>>> c31ce4e (Update in Applysheild)

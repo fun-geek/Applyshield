@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Least privilege: CI only needs to read the repository.
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    name: fmt, clippy, test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        run: |
+          rustup toolchain install stable --profile minimal -c rustfmt -c clippy
+          rustup default stable
+      - name: Format check
+        run: cargo fmt --all -- --check
+      - name: Clippy (warnings are errors)
+        run: cargo clippy --all-targets --locked -- -D warnings
+      - name: Tests
+        run: cargo test --all-targets --locked
+
+  c-sanitizers:
+    name: C engine under ASan + UBSan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and run C tests with sanitizers
+        run: |
+          cc -std=c11 -Wall -Wextra -Wpedantic -Werror \
+             -fsanitize=address,undefined -fno-sanitize-recover=all -g \
+             c/matcher.c c/test_matcher.c -o test_matcher
+          ./test_matcher
+
+  audit:
+    name: dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+      - name: Install cargo-audit and cargo-deny
+        run: cargo install --locked cargo-audit cargo-deny
+      - name: Known vulnerabilities (RustSec)
+        run: cargo audit
+      - name: Licenses, bans, sources
+        run: cargo deny check

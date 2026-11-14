@@ -1,0 +1,16 @@
+# ApplyShield example profile. Copy this file, edit it, then run:
+#   applyshield import-profile my-profile.txt
+#
+# Required: full_name, email, degree, field, graduation_year, skills
+# Optional: phone, target_roles, locations
+# Only list skills you genuinely have: drafts are checked against this list.
+
+full_name = Asha Verma
+email = asha.verma@example.org
+phone = +91 98765 43210
+degree = B.Tech
+field = CSE (AI & ML)
+graduation_year = 2028
+skills = rust, c, sql, python, linux, git
+target_roles = Software Developer, AI Engineer
+locations = Remote, Bengaluru
