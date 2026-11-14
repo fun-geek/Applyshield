@@ -1,5 +1,5 @@
 # ApplyShield
-
+AI prepares. Security validates. The user decides.
 A security-first job search and application copilot, written in Rust with a C matching engine.
 
 > **AI prepares. Security validates. The user decides.**
